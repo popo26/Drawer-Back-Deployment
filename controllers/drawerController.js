@@ -12,7 +12,7 @@ const getDrawers = (res) => {
 };
 const createDrawer = (data, res) => {
   //creates a new user using JSON data POSTed in request body
-  console.log(data);
+  //console.log(data);
   new Models.Drawer(data)
     .save()
     .then((data) => res.send({ result: 200, data: data }))
@@ -24,7 +24,7 @@ const createDrawer = (data, res) => {
 
 const updateDrawer = (req, res) => {
   //updates the user matching the ID from the param using JSON data POSTed in request body
-  console.log(req.body);
+  //console.log(req.body);
   Models.Drawer.findByIdAndUpdate(req.params.id, req.body, {
     useFindAndModify: false,
   })
@@ -36,7 +36,7 @@ const updateDrawer = (req, res) => {
 };
 const deleteDrawer = (req, res) => {
   //deletes the user matching the ID from the param
-  console.log("req.param.id", req.params.id);
+  //console.log("req.param.id", req.params.id);
   Models.Drawer.findByIdAndDelete(req.params.id, {
     useFindAndModify: false,
   })

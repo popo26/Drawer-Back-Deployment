@@ -31,7 +31,7 @@ const registerUser = async (req, res) => {
   // ADD VALIDATION
   try {
     //Step 1: validae the user input and if there is an error, send 400 res and error message
-    console.log("My user post body req::", req.body);
+    //console.log("My user post body req::", req.body);
 
     //step 2: check if user already exists, if yes send res 400
     let user = await Models.User.findOne({ email: req.body.email });
@@ -65,7 +65,7 @@ const registerUser = async (req, res) => {
 };
 
 const updateUsernameOrEmail = (req, res) => {
-  console.log("req body UPDATE", req.body);
+  //console.log("req body UPDATE", req.body);
   Models.User.findByIdAndUpdate(req.params.id, req.body)
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
@@ -75,13 +75,13 @@ const updateUsernameOrEmail = (req, res) => {
 };
 
 const updatePassword = async (req, res) => {
-  console.log("req body Password", req.body);
+  //console.log("req body Password", req.body);
   let user = await Models.User.findOne({ _id: req.body._id });
-  console.log("found user", user);
+  //console.log("found user", user);
   user.password = req.body.password;
-  console.log("after password set", user);
+  //console.log("after password set", user);
   user.save();
-  console.log("after saving user", user);
+  //console.log("after saving user", user);
 };
 
 const logoutUser = (req, res, next) => {
