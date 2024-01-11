@@ -13,7 +13,7 @@ let dbConnect = require("./dbConnect");
 const app = express();
 require("dotenv").config();
 // parse requests of content-type - application / json;
-app.use(express.json());
+app.use(express.json({ limit: "50mb" })); //to prevent PayloadTooLargeError for scribble creation
 app.use(cors());
 
 //Middleware
@@ -21,6 +21,7 @@ app.use(morgan("dev"));
 app.use(
   bodyParser.urlencoded({
     extended: false,
+    limit: "50mb",
   })
 );
 app.use(bodyParser.json());
@@ -29,8 +30,9 @@ app.use(bodyParser.json());
 app.use(
   session({
     secret: process.env.EXPRESS_SESSION_SECRET || "fraggle-rock", // It holds the secret key for session
-    store: MongoStore.create({ mongoUrl: process.env.DB_URI || "mongodb://127.0.0.1/drawer-local" }),
-
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_URI || "mongodb://127.0.0.1/drawer-local",
+    }),
     resave: false, // Forces the session to be saved back to the session store
     saveUninitialized: false, // Forces a session that is "uninitialized" to be saved to the store
     cookie: {
